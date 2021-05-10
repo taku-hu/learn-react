@@ -1,5 +1,8 @@
+import { SecondaryButton } from 'components/atoms/button/SecondaryButton'
 import { SearchInput } from 'components/molecules/SearchInput'
 import { UserCard } from 'components/organisms/user/UserCard'
+import { useContext } from 'react'
+import { UserContext } from 'store/User'
 import styled from 'styled-components'
 
 const users = Array.from(new Array(10).keys()).map((_, index) => ({
@@ -15,10 +18,15 @@ const users = Array.from(new Array(10).keys()).map((_, index) => ({
 }))
 
 export const Users = () => {
+  const { userInfo, setUserInfo } = useContext(UserContext)
+  const onClickSwitch = () => setUserInfo({ isAdmin: !userInfo.isAdmin })
+
   return (
     <SContainer>
       <h2>ユーザー一覧</h2>
       <SearchInput />
+      <br />
+      <SecondaryButton onClick={onClickSwitch}>切り替え</SecondaryButton>
       <SUserArea>
         {users.map(user => (<UserCard key={user.id} user={user} />))}
       </SUserArea>

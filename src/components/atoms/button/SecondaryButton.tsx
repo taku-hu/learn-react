@@ -3,9 +3,13 @@ import { BaseButton } from 'components/atoms/button/BaseButton'
 
 import { FC } from 'react'
 
-export const SecondaryButton: FC = ({ children }) => {
+type Props = {
+  onClick: VoidFunction
+}
+
+export const SecondaryButton: FC<Props> = ({ children, onClick }) => {
   return (
-    <SButton>{children}</SButton>
+    <SButton onClick={onClick}>{children}</SButton>
   )
 }
 

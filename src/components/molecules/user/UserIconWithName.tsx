@@ -1,20 +1,25 @@
 import styled from 'styled-components'
+import { memo, useContext } from 'react'
+import { UserContext } from 'store/User'
 
-import { FC } from 'react'
+import type { FC } from 'react'
 
 type Props = {
   image: string;
-  name: string
+  name: string;
 }
 
-export const UserIconWithName: FC<Props> = ({ image, name }) => {
+export const UserIconWithName: FC<Props> = memo(({ image, name }) => {
+  const { userInfo } = useContext(UserContext)
+  const isAdmin = !!userInfo.isAdmin
   return (
     <SContainer>
       <SImg width={160} height={160} src={image} alt={name} />
       <SName>{name}</SName>
+      {isAdmin && <SEdit>編集</SEdit>}
     </SContainer>
   )
-}
+})
 
 const SContainer = styled.div`
   text-align: center;
@@ -26,4 +31,9 @@ const SName = styled.p`
   font-size: 18px;
   font-weight: bold;
   margin: 0;
+`
+const SEdit = styled.span`
+  text-decoration: underline;
+  color: #aaa;
+  cursor: pointer;
 `
