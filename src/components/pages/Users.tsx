@@ -1,9 +1,11 @@
+import styled from 'styled-components'
 import { SecondaryButton } from 'components/atoms/button/SecondaryButton'
 import { SearchInput } from 'components/molecules/SearchInput'
 import { UserCard } from 'components/organisms/user/UserCard'
-import { useContext } from 'react'
-import { UserContext } from 'store/User'
-import styled from 'styled-components'
+// import { useContext } from 'react'
+// import { UserContext } from 'store/User'
+import { userState } from 'store/useState'
+import { useRecoilState } from 'recoil'
 
 const users = Array.from(new Array(10).keys()).map((_, index) => ({
   id: index,
@@ -18,7 +20,8 @@ const users = Array.from(new Array(10).keys()).map((_, index) => ({
 }))
 
 export const Users = () => {
-  const { userInfo, setUserInfo } = useContext(UserContext)
+  // const { userInfo, setUserInfo } = useContext(UserContext)
+  const [userInfo, setUserInfo] = useRecoilState(userState)
   const onClickSwitch = () => setUserInfo({ isAdmin: !userInfo.isAdmin })
 
   return (

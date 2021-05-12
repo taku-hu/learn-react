@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import { memo, useContext } from 'react'
-import { UserContext } from 'store/User'
+import { memo/*, useContext */ } from 'react'
+// import { UserContext } from 'store/User'
+import { useRecoilValue } from 'recoil'
 
 import type { FC } from 'react'
+import { userState } from 'store/useState'
 
 type Props = {
   image: string;
@@ -10,7 +12,8 @@ type Props = {
 }
 
 export const UserIconWithName: FC<Props> = memo(({ image, name }) => {
-  const { userInfo } = useContext(UserContext)
+  // const { userInfo } = useContext(UserContext)
+  const userInfo = useRecoilValue(userState)
   const isAdmin = !!userInfo.isAdmin
   return (
     <SContainer>
